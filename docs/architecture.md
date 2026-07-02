@@ -9,6 +9,7 @@ local text / Markdown / HTML source
   -> readiness signals
   -> output-level decision
   -> artifact builder
+  -> skill evaluator
   -> note / seed / mini skill / full skill
 ```
 
@@ -22,6 +23,7 @@ local text / Markdown / HTML source
 | `source_to_skill/scoring.py` | compute transparent readiness signals |
 | `source_to_skill/models.py` | shared dataclasses and output levels |
 | `source_to_skill/templates.py` | render reports and generated artifacts |
+| `source_to_skill/evaluator.py` | compare generated guidance against evidence and render evaluation reports |
 | `source_to_skill/builder.py` | write artifacts to disk |
 | `source_to_skill/cli.py` | command-line interface |
 
@@ -31,3 +33,7 @@ PDF, EPUB, RSS, remote web pages, and audio transcription should be intake
 plugins. They should normalize sources into text before the readiness gate runs.
 
 The readiness gate should remain independent from extraction.
+
+The evaluator should also remain independent from extraction. It reviews the
+generated skill folder and can be run after build output has been edited by a
+human.

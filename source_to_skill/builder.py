@@ -4,6 +4,7 @@ import shutil
 from pathlib import Path
 
 from source_to_skill.analyzer import analyze_source, read_source
+from source_to_skill.evaluator import evaluate_skill, render_eval_report
 from source_to_skill.models import OutputLevel, ReadinessReport
 from source_to_skill.templates import (
     render_cheatsheet,
@@ -55,6 +56,8 @@ def build_artifacts(source: str | Path, output_dir: str | Path, *, level: str = 
         (target / "SKILL.md").write_text(render_skill_md(report, full=full), encoding="utf-8")
         (target / "cheatsheet.md").write_text(render_cheatsheet(report), encoding="utf-8")
         (references / "evidence.md").write_text(render_evidence(report), encoding="utf-8")
+        eval_report = evaluate_skill(target)
+        (target / "eval-report.md").write_text(render_eval_report(eval_report), encoding="utf-8")
         if full:
             (references / "source.md").write_text(source_text, encoding="utf-8")
             evals = target / "evals"

@@ -7,6 +7,7 @@ from pathlib import Path
 
 from source_to_skill.analyzer import analyze_source
 from source_to_skill.builder import build_artifacts, fold_seed
+from source_to_skill.evaluator import evaluate_skill, render_eval_report
 from source_to_skill.models import OutputLevel
 from source_to_skill.templates import render_report
 from source_to_skill.transcript import clean_transcript_file
@@ -43,6 +44,11 @@ def build_parser() -> argparse.ArgumentParser:
     clean.add_argument("--out", required=True, help="output Markdown path")
     clean.add_argument("--title", help="title to use in the cleaned transcript")
 
+    eval_skill = subparsers.add_parser("eval-skill", help="check generated skill claims against evidence")
+    eval_skill.add_argument("skill", help="path to a generated skill folder")
+    eval_skill.add_argument("--out", help="optional path to write eval-report.md")
+    eval_skill.add_argument("--json", action="store_true", help="print a machine-readable evaluation report")
+
     return parser
 
 
@@ -72,6 +78,14 @@ def main(argv: list[str] | None = None) -> int:
             out_path.parent.mkdir(parents=True, exist_ok=True)
             out_path.write_text(result.cleaned_text, encoding="utf-8")
             print(f"Cleaned transcript {out_path} ({result.segment_count} segments, {result.removed_lines} removed lines)")
+            return 0
+        if args.command == "eval-skill":
+            report = evaluate_skill(args.skill)
+            rendered = json.dumps(report.to_dict(), ensure_ascii=False, indent=2) if args.json else render_eval_report(report)
+            if args.out:
+                Path(args.out).write_text(rendered, encoding="utf-8")
+            else:
+                print(rendered)
             return 0
     except Exception as exc:
         print(f"error: {exc}", file=sys.stderr)

@@ -28,7 +28,7 @@ Goal: normalize more source types into text before scoring.
 Goal: make generated skills easier to trust.
 
 - Smoke-question runner.
-- Evidence coverage checks.
+- Evidence coverage checks. Shipped.
 - Claims-without-evidence warnings.
 - Fold-in quality report for existing skills.
 

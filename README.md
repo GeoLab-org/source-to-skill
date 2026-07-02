@@ -63,6 +63,12 @@ Build the recommended artifact:
 source-to-skill build examples/article.md --level auto --out out
 ```
 
+Evaluate a generated skill against its evidence file:
+
+```bash
+source-to-skill eval-skill out/review-playbook --json
+```
+
 Force a skill seed:
 
 ```bash
@@ -99,6 +105,10 @@ The v0 scorer is intentionally transparent. It looks for:
 It is not a claim of objective truth. It is a quality gate that makes weak inputs
 harder to over-promote.
 
+Generated Mini Skill and Full Skill artifacts also include `eval-report.md`, a
+small check that compares `Core Guidance` bullets with `references/evidence.md`.
+The same check can be run manually with `source-to-skill eval-skill`.
+
 ## Example Report
 
 ```text
@@ -132,7 +142,8 @@ right.
 See [docs/philosophy.md](docs/philosophy.md) and
 [docs/output-levels.md](docs/output-levels.md). The scoring rules are documented
 in [docs/scoring.md](docs/scoring.md). Transcript cleanup is documented in
-[docs/transcripts.md](docs/transcripts.md).
+[docs/transcripts.md](docs/transcripts.md). Skill evidence checks are documented
+in [docs/evaluation.md](docs/evaluation.md).
 
 ## Roadmap
 
