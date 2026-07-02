@@ -4,6 +4,7 @@ The v0 architecture is intentionally small.
 
 ```text
 local text / Markdown / HTML source
+  -> optional transcript cleanup
   -> analyzer
   -> readiness signals
   -> output-level decision
@@ -16,6 +17,7 @@ local text / Markdown / HTML source
 | Path | Responsibility |
 |---|---|
 | `source_to_skill/intake.py` | read local text/Markdown/HTML and normalize it into plain Markdown-like text |
+| `source_to_skill/transcript.py` | clean transcript-like text, SRT, and VTT into Markdown segments |
 | `source_to_skill/analyzer.py` | normalize text, extract title and evidence candidates |
 | `source_to_skill/scoring.py` | compute transparent readiness signals |
 | `source_to_skill/models.py` | shared dataclasses and output levels |

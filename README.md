@@ -75,6 +75,16 @@ Fold a weak source into an existing skill:
 source-to-skill fold examples/meeting-transcript.md ~/.codex/skills/design-review
 ```
 
+Clean a transcript before scoring:
+
+```bash
+source-to-skill clean-transcript examples/meeting-transcript.vtt \
+  --out out/clean-meeting.md \
+  --title "Meeting Transcript"
+
+source-to-skill analyze out/clean-meeting.md
+```
+
 ## What It Scores
 
 The v0 scorer is intentionally transparent. It looks for:
@@ -121,7 +131,8 @@ right.
 
 See [docs/philosophy.md](docs/philosophy.md) and
 [docs/output-levels.md](docs/output-levels.md). The scoring rules are documented
-in [docs/scoring.md](docs/scoring.md).
+in [docs/scoring.md](docs/scoring.md). Transcript cleanup is documented in
+[docs/transcripts.md](docs/transcripts.md).
 
 ## Roadmap
 

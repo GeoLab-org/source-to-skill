@@ -9,6 +9,7 @@ from source_to_skill.analyzer import analyze_source
 from source_to_skill.builder import build_artifacts, fold_seed
 from source_to_skill.models import OutputLevel
 from source_to_skill.templates import render_report
+from source_to_skill.transcript import clean_transcript_file
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -37,6 +38,11 @@ def build_parser() -> argparse.ArgumentParser:
     fold.add_argument("source", help="path to a UTF-8 text or Markdown source")
     fold.add_argument("skill", help="path to an existing skill folder")
 
+    clean = subparsers.add_parser("clean-transcript", help="clean transcript, SRT, or VTT text into Markdown")
+    clean.add_argument("source", help="path to a transcript-like text file")
+    clean.add_argument("--out", required=True, help="output Markdown path")
+    clean.add_argument("--title", help="title to use in the cleaned transcript")
+
     return parser
 
 
@@ -59,6 +65,13 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "fold":
             target = fold_seed(args.source, args.skill)
             print(f"Added seed {target}")
+            return 0
+        if args.command == "clean-transcript":
+            result = clean_transcript_file(args.source, title=args.title)
+            out_path = Path(args.out)
+            out_path.parent.mkdir(parents=True, exist_ok=True)
+            out_path.write_text(result.cleaned_text, encoding="utf-8")
+            print(f"Cleaned transcript {out_path} ({result.segment_count} segments, {result.removed_lines} removed lines)")
             return 0
     except Exception as exc:
         print(f"error: {exc}", file=sys.stderr)
