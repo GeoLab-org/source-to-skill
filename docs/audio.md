@@ -23,6 +23,12 @@ source-to-skill clean-transcript out/recording.vtt \
 source-to-skill analyze out/recording-clean.md
 ```
 
+For long recordings, split the cleaned transcript before building:
+
+```bash
+source-to-skill split-source out/recording-clean.md --out out/recording-topics
+```
+
 If the source is strong enough:
 
 ```bash
@@ -41,6 +47,9 @@ Prefer:
 - `Skill Seed` for one or two reusable rules
 - `Mini Skill` only when the recording has a clear method, examples, and
   repeatable decision rules
+
+For long recordings, make that decision per topic segment rather than for the
+whole transcript.
 
 ## Requirements
 

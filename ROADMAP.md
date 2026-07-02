@@ -38,7 +38,7 @@ Goal: support audio without making the product "recording-to-skill."
 
 - Local transcript intake first.
 - Optional Whisper CLI transcription wrapper. Shipped.
-- Transcript cleanup and topic splitting.
+- Transcript cleanup and topic splitting. Shipped.
 - Default audio output should usually be Note or Skill Seed unless the score is strong.
 
 ## v1.0: Stable Skill Compiler

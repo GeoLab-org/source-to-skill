@@ -105,6 +105,12 @@ source-to-skill transcribe-audio recording.m4a \
   --model base
 ```
 
+Split a long source into separately scored topic candidates:
+
+```bash
+source-to-skill split-source out/clean-meeting.md --out out/topics
+```
+
 ## What It Scores
 
 The v0 scorer is intentionally transparent. It looks for:
@@ -142,7 +148,8 @@ Caution:
 
 This is an early project. It supports local UTF-8 text, Markdown, simple HTML,
 single-page remote text/HTML URLs, transcript cleanup, and optional
-Whisper-compatible audio transcription through an external CLI. PDF, EPUB,
+Whisper-compatible audio transcription through an external CLI. It can split
+long sources into separately scored topic candidates before building. PDF, EPUB,
 crawled websites, and browser-only pages are intentionally left for later intake
 plugins. The first job is to get the skill-worthiness gate right.
 
@@ -159,7 +166,8 @@ See [docs/philosophy.md](docs/philosophy.md) and
 in [docs/scoring.md](docs/scoring.md). Intake support is documented in
 [docs/intake.md](docs/intake.md). Transcript cleanup is documented in
 [docs/transcripts.md](docs/transcripts.md). Audio transcription is documented in
-[docs/audio.md](docs/audio.md). Skill evidence checks are documented in
+[docs/audio.md](docs/audio.md). Topic splitting is documented in
+[docs/splitting.md](docs/splitting.md). Skill evidence checks are documented in
 [docs/evaluation.md](docs/evaluation.md).
 
 ## Roadmap

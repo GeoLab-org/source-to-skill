@@ -10,6 +10,7 @@ from source_to_skill.audio import SUPPORTED_TRANSCRIPT_FORMATS, transcribe_audio
 from source_to_skill.builder import build_artifacts, fold_seed
 from source_to_skill.evaluator import evaluate_skill, render_eval_report
 from source_to_skill.models import OutputLevel
+from source_to_skill.segmenter import write_split_artifacts
 from source_to_skill.templates import render_report
 from source_to_skill.transcript import clean_transcript_file
 
@@ -39,6 +40,11 @@ def build_parser() -> argparse.ArgumentParser:
     fold = subparsers.add_parser("fold", help="add a source as a seed under an existing skill")
     fold.add_argument("source", help="path to a UTF-8 text or Markdown source")
     fold.add_argument("skill", help="path to an existing skill folder")
+
+    split = subparsers.add_parser("split-source", help="split a long source into separately scored topic candidates")
+    split.add_argument("source", help="path or URL to a source")
+    split.add_argument("--out", required=True, help="output directory for topic-report.md and segment files")
+    split.add_argument("--json", action="store_true", help="print a machine-readable split report")
 
     clean = subparsers.add_parser("clean-transcript", help="clean transcript, SRT, or VTT text into Markdown")
     clean.add_argument("source", help="path to a transcript-like text file")
@@ -85,6 +91,13 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "fold":
             target = fold_seed(args.source, args.skill)
             print(f"Added seed {target}")
+            return 0
+        if args.command == "split-source":
+            result = write_split_artifacts(args.source, args.out)
+            if args.json:
+                print(json.dumps(result.to_dict(), ensure_ascii=False, indent=2))
+            else:
+                print(f"Split source into {len(result.segments)} segments at {result.output_dir}")
             return 0
         if args.command == "clean-transcript":
             result = clean_transcript_file(args.source, title=args.title)
