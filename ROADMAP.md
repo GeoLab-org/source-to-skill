@@ -37,7 +37,7 @@ Goal: make generated skills easier to trust.
 Goal: support audio without making the product "recording-to-skill."
 
 - Local transcript intake first.
-- Optional Whisper-based audio transcription.
+- Optional Whisper CLI transcription wrapper. Shipped.
 - Transcript cleanup and topic splitting.
 - Default audio output should usually be Note or Skill Seed unless the score is strong.
 

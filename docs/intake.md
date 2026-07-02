@@ -14,6 +14,7 @@ skill.
 | Remote `http` / `https` HTML | Supported | Fetches one URL and applies the HTML cleaner |
 | Remote `http` / `https` text | Supported | Fetches one URL and reads text content |
 | SRT / VTT transcripts | Supported through `clean-transcript` | Clean first, then analyze the Markdown output |
+| Audio files | Supported through `transcribe-audio` when a Whisper-compatible CLI is installed | Transcribe first, then clean and analyze |
 
 ## URL Usage
 
@@ -31,7 +32,6 @@ agent and uses the same conservative HTML cleaner as local HTML files.
 - JavaScript-rendered extraction
 - login-gated pages
 - PDF / EPUB parsing
-- audio transcription
 
 Those should be added as intake plugins that normalize sources into text before
 the readiness gate runs.

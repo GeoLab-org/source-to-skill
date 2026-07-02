@@ -7,6 +7,9 @@ generator makes weak sources look stronger than they are.
 `source-to-skill clean-transcript` performs a conservative cleanup before the
 readiness gate runs.
 
+If the source is audio, transcribe it first with `source-to-skill
+transcribe-audio` or another transcription tool, then clean the transcript.
+
 ## What It Does
 
 - removes SRT / VTT timing lines

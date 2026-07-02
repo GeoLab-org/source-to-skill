@@ -6,6 +6,7 @@ import sys
 from pathlib import Path
 
 from source_to_skill.analyzer import analyze_source
+from source_to_skill.audio import SUPPORTED_TRANSCRIPT_FORMATS, transcribe_audio_file
 from source_to_skill.builder import build_artifacts, fold_seed
 from source_to_skill.evaluator import evaluate_skill, render_eval_report
 from source_to_skill.models import OutputLevel
@@ -44,6 +45,19 @@ def build_parser() -> argparse.ArgumentParser:
     clean.add_argument("--out", required=True, help="output Markdown path")
     clean.add_argument("--title", help="title to use in the cleaned transcript")
 
+    transcribe = subparsers.add_parser("transcribe-audio", help="transcribe an audio file with an installed Whisper CLI")
+    transcribe.add_argument("source", help="path to an audio file")
+    transcribe.add_argument("--out", required=True, help="path to write the transcript")
+    transcribe.add_argument("--engine", default="whisper", help="transcription CLI executable (default: whisper)")
+    transcribe.add_argument("--model", help="optional model name passed to the engine")
+    transcribe.add_argument("--language", help="optional language code passed to the engine")
+    transcribe.add_argument(
+        "--format",
+        default="vtt",
+        choices=sorted(SUPPORTED_TRANSCRIPT_FORMATS),
+        help="transcript format to request (default: vtt)",
+    )
+
     eval_skill = subparsers.add_parser("eval-skill", help="check generated skill claims against evidence")
     eval_skill.add_argument("skill", help="path to a generated skill folder")
     eval_skill.add_argument("--out", help="optional path to write eval-report.md")
@@ -78,6 +92,18 @@ def main(argv: list[str] | None = None) -> int:
             out_path.parent.mkdir(parents=True, exist_ok=True)
             out_path.write_text(result.cleaned_text, encoding="utf-8")
             print(f"Cleaned transcript {out_path} ({result.segment_count} segments, {result.removed_lines} removed lines)")
+            return 0
+        if args.command == "transcribe-audio":
+            out_path = Path(args.out)
+            result = transcribe_audio_file(
+                Path(args.source),
+                out_path,
+                engine=args.engine,
+                model=args.model,
+                language=args.language,
+                output_format=args.format,
+            )
+            print(f"Transcribed audio {result.audio_path} -> {result.transcript_path} using {result.engine}")
             return 0
         if args.command == "eval-skill":
             report = evaluate_skill(args.skill)

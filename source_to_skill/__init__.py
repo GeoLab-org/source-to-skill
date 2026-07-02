@@ -1,6 +1,7 @@
 """Source-to-Skill: compile reusable knowledge into agent skills."""
 
 from source_to_skill.analyzer import analyze_source, analyze_text
+from source_to_skill.audio import transcribe_audio_file
 from source_to_skill.builder import build_artifacts
 from source_to_skill.evaluator import evaluate_skill
 from source_to_skill.intake import read_source
@@ -17,6 +18,7 @@ __all__ = [
     "clean_transcript_text",
     "evaluate_skill",
     "read_source",
+    "transcribe_audio_file",
 ]
 
 __version__ = "0.1.0"
