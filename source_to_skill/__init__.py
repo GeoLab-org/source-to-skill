@@ -2,6 +2,7 @@
 
 from source_to_skill.analyzer import analyze_source, analyze_text
 from source_to_skill.builder import build_artifacts
+from source_to_skill.intake import read_source
 from source_to_skill.models import OutputLevel, ReadinessReport
 
 __all__ = [
@@ -10,6 +11,7 @@ __all__ = [
     "analyze_source",
     "analyze_text",
     "build_artifacts",
+    "read_source",
 ]
 
 __version__ = "0.1.0"

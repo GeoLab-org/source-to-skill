@@ -3,7 +3,7 @@
 The v0 architecture is intentionally small.
 
 ```text
-local source
+local text / Markdown / HTML source
   -> analyzer
   -> readiness signals
   -> output-level decision
@@ -15,7 +15,8 @@ local source
 
 | Path | Responsibility |
 |---|---|
-| `source_to_skill/analyzer.py` | read text, normalize it, extract title and evidence candidates |
+| `source_to_skill/intake.py` | read local text/Markdown/HTML and normalize it into plain Markdown-like text |
+| `source_to_skill/analyzer.py` | normalize text, extract title and evidence candidates |
 | `source_to_skill/scoring.py` | compute transparent readiness signals |
 | `source_to_skill/models.py` | shared dataclasses and output levels |
 | `source_to_skill/templates.py` | render reports and generated artifacts |
@@ -24,7 +25,7 @@ local source
 
 ## Later Intake Plugins
 
-PDF, EPUB, HTML, RSS, and audio transcription should be intake plugins. They
-should normalize sources into text before the readiness gate runs.
+PDF, EPUB, RSS, remote web pages, and audio transcription should be intake
+plugins. They should normalize sources into text before the readiness gate runs.
 
 The readiness gate should remain independent from extraction.

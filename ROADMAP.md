@@ -17,8 +17,9 @@ Status: shipped.
 
 Goal: normalize more source types into text before scoring.
 
+- Local HTML intake. Shipped.
 - PDF and EPUB intake.
-- HTML / article intake.
+- Remote HTML / article intake.
 - Transcript file cleanup.
 - Keep extraction separate from scoring.
 

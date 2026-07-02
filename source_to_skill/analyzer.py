@@ -3,6 +3,7 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
+from source_to_skill.intake import read_source
 from source_to_skill.models import ReadinessReport
 from source_to_skill.scoring import (
     count_headings,
@@ -15,14 +16,6 @@ from source_to_skill.scoring import (
     score_structure,
     score_transferability,
 )
-
-
-def read_source(path: str | Path) -> str:
-    source_path = Path(path)
-    try:
-        return source_path.read_text(encoding="utf-8")
-    except UnicodeDecodeError:
-        return source_path.read_text(encoding="utf-8", errors="replace")
 
 
 def analyze_source(path: str | Path) -> ReadinessReport:

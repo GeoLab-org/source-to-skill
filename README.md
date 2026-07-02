@@ -106,9 +106,10 @@ Caution:
 
 ## Project Status
 
-This is a v0.1 project. It supports local UTF-8 text and Markdown sources. PDF,
-EPUB, web pages, and audio transcription are intentionally left for later intake
-plugins. The first job is to get the skill-worthiness gate right.
+This is an early project. It supports local UTF-8 text, Markdown, and simple
+HTML sources. PDF, EPUB, web pages, and audio transcription are intentionally
+left for later intake plugins. The first job is to get the skill-worthiness gate
+right.
 
 ## Design Principles
 
