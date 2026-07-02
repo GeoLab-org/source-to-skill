@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="256" height="256" viewBox="0 0 256 256" role="img" aria-labelledby="title desc">
+  <title id="title">source-to-skill logo</title>
+  <desc id="desc">Layered source pages passing through a quality gate into a compact skill block.</desc>
+  <rect width="256" height="256" rx="48" fill="#f6f8f7"/>
+  <rect x="38" y="58" width="72" height="92" rx="10" fill="#ffffff" stroke="#24312f" stroke-width="7"/>
+  <path d="M56 86h36M56 109h29M56 132h39" stroke="#5d726d" stroke-width="7" stroke-linecap="round"/>
+  <rect x="56" y="78" width="72" height="92" rx="10" fill="#e7efed" stroke="#24312f" stroke-width="7"/>
+  <path d="M74 106h36M74 129h29M74 152h39" stroke="#5d726d" stroke-width="7" stroke-linecap="round"/>
+  <path d="M132 76l34 52-34 52" fill="none" stroke="#2f8f83" stroke-width="13" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="154" y="82" width="64" height="92" rx="14" fill="#24312f"/>
+  <path d="M174 113h24M174 135h24M174 157h15" stroke="#d9f4ee" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="204" cy="104" r="7" fill="#79d3c6"/>
+</svg>

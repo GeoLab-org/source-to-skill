@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="210" viewBox="0 0 980 210" role="img" aria-labelledby="title desc">
+  <title id="title">Output levels</title>
+  <desc id="desc">Five output levels from discard to full skill.</desc>
+  <rect width="980" height="210" rx="18" fill="#f7f9f8"/>
+  <g font-family="Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif">
+    <text x="44" y="44" font-size="18" font-weight="700" fill="#24312f">Output levels</text>
+    <g transform="translate(44 78)">
+      <rect width="166" height="86" rx="8" fill="#ffffff" stroke="#d4dcda"/>
+      <text x="18" y="30" font-size="14" font-weight="700" fill="#24312f">0 · Discard</text>
+      <text x="18" y="56" font-size="12" fill="#64736f">too thin or local</text>
+    </g>
+    <g transform="translate(226 78)">
+      <rect width="166" height="86" rx="8" fill="#ffffff" stroke="#cbd7d4"/>
+      <text x="18" y="30" font-size="14" font-weight="700" fill="#24312f">1 · Note</text>
+      <text x="18" y="56" font-size="12" fill="#64736f">information only</text>
+    </g>
+    <g transform="translate(408 78)">
+      <rect width="166" height="86" rx="8" fill="#edf4f2" stroke="#aac2bd"/>
+      <text x="18" y="30" font-size="14" font-weight="700" fill="#24312f">2 · Seed</text>
+      <text x="18" y="56" font-size="12" fill="#64736f">promising rules</text>
+    </g>
+    <g transform="translate(590 78)">
+      <rect width="166" height="86" rx="8" fill="#d9eee9" stroke="#73b7ad"/>
+      <text x="18" y="30" font-size="14" font-weight="700" fill="#24312f">3 · Mini Skill</text>
+      <text x="18" y="56" font-size="12" fill="#4c625d">focused and useful</text>
+    </g>
+    <g transform="translate(772 78)">
+      <rect width="166" height="86" rx="8" fill="#24312f"/>
+      <text x="18" y="30" font-size="14" font-weight="700" fill="#ffffff">4 · Full Skill</text>
+      <text x="18" y="56" font-size="12" fill="#d9f4ee">structured system</text>
+    </g>
+  </g>
+</svg>
