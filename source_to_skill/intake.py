@@ -2,11 +2,14 @@ from __future__ import annotations
 
 import html.parser
 from pathlib import Path
+from urllib.parse import urlparse
+from urllib.request import Request, urlopen
 
 
 TEXT_SUFFIXES = {".txt", ".md", ".markdown"}
 HTML_SUFFIXES = {".html", ".htm"}
 SUPPORTED_SUFFIXES = TEXT_SUFFIXES | HTML_SUFFIXES
+URL_SCHEMES = {"http", "https"}
 
 
 class _HTMLTextExtractor(html.parser.HTMLParser):
@@ -45,6 +48,9 @@ class _HTMLTextExtractor(html.parser.HTMLParser):
 
 
 def read_source(path: str | Path) -> str:
+    if is_url(path):
+        return read_url(str(path))
+
     source_path = Path(path)
     suffix = source_path.suffix.lower()
     if suffix not in SUPPORTED_SUFFIXES:
@@ -61,6 +67,26 @@ def read_text(path: Path) -> str:
         return path.read_text(encoding="utf-8")
     except UnicodeDecodeError:
         return path.read_text(encoding="utf-8", errors="replace")
+
+
+def is_url(value: str | Path) -> bool:
+    parsed = urlparse(str(value))
+    return parsed.scheme in URL_SCHEMES and bool(parsed.netloc)
+
+
+def read_url(url: str, *, timeout: int = 20) -> str:
+    request = Request(url, headers={"User-Agent": "source-to-skill/0.1"})
+    with urlopen(request, timeout=timeout) as response:
+        raw = response.read()
+        content_type = response.headers.get_content_type()
+        charset = response.headers.get_content_charset() or "utf-8"
+    text = raw.decode(charset, errors="replace")
+    suffix = Path(urlparse(url).path).suffix.lower()
+    if content_type == "text/html" or suffix in HTML_SUFFIXES:
+        return html_to_text(text)
+    if content_type.startswith("text/") or suffix in TEXT_SUFFIXES:
+        return text
+    raise ValueError(f"Unsupported remote source type '{content_type}'. Expected text or HTML.")
 
 
 def html_to_text(raw_html: str) -> str:

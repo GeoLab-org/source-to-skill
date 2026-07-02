@@ -41,7 +41,7 @@ class Signal:
 
 @dataclass(frozen=True)
 class ReadinessReport:
-    source_path: Path | None
+    source_path: Path | str | None
     title: str
     score: int
     level: OutputLevel

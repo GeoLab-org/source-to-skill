@@ -2,8 +2,9 @@ from __future__ import annotations
 
 import re
 from pathlib import Path
+from urllib.parse import urlparse
 
-from source_to_skill.intake import read_source
+from source_to_skill.intake import is_url, read_source
 from source_to_skill.models import ReadinessReport
 from source_to_skill.scoring import (
     count_headings,
@@ -19,11 +20,11 @@ from source_to_skill.scoring import (
 
 
 def analyze_source(path: str | Path) -> ReadinessReport:
-    source_path = Path(path)
-    return analyze_text(read_source(source_path), source_path=source_path)
+    source_ref = str(path) if is_url(path) else Path(path)
+    return analyze_text(read_source(path), source_path=source_ref)
 
 
-def analyze_text(text: str, *, source_path: Path | None = None) -> ReadinessReport:
+def analyze_text(text: str, *, source_path: Path | str | None = None) -> ReadinessReport:
     normalized = normalize_text(text)
     word_count = count_words(normalized)
     heading_count = count_headings(normalized)
@@ -58,7 +59,7 @@ def normalize_text(text: str) -> str:
     return text.strip()
 
 
-def extract_title(text: str, source_path: Path | None) -> str:
+def extract_title(text: str, source_path: Path | str | None) -> str:
     for line in text.splitlines():
         stripped = line.strip()
         if stripped.startswith("# "):
@@ -66,7 +67,12 @@ def extract_title(text: str, source_path: Path | None) -> str:
         if stripped and len(stripped) <= 90:
             return stripped.strip("# ")
     if source_path is not None:
-        return source_path.stem.replace("-", " ").replace("_", " ").title()
+        if isinstance(source_path, Path):
+            return source_path.stem.replace("-", " ").replace("_", " ").title()
+        parsed = urlparse(source_path)
+        url_stem = Path(parsed.path).stem
+        if url_stem:
+            return url_stem.replace("-", " ").replace("_", " ").title()
     return "Untitled Source"
 
 

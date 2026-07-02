@@ -3,8 +3,9 @@ from __future__ import annotations
 import shutil
 from pathlib import Path
 
-from source_to_skill.analyzer import analyze_source, read_source
+from source_to_skill.analyzer import analyze_source
 from source_to_skill.evaluator import evaluate_skill, render_eval_report
+from source_to_skill.intake import read_source
 from source_to_skill.models import OutputLevel, ReadinessReport
 from source_to_skill.templates import (
     render_cheatsheet,
@@ -29,10 +30,9 @@ def parse_level(value: str, report: ReadinessReport) -> OutputLevel:
 
 
 def build_artifacts(source: str | Path, output_dir: str | Path, *, level: str = "auto") -> Path:
-    source_path = Path(source)
     out_path = Path(output_dir)
-    source_text = read_source(source_path)
-    report = analyze_source(source_path)
+    source_text = read_source(source)
+    report = analyze_source(source)
     selected = parse_level(level, report)
     target = out_path / slugify(report.title)
     if target.exists():
@@ -67,9 +67,8 @@ def build_artifacts(source: str | Path, output_dir: str | Path, *, level: str = 
 
 
 def fold_seed(source: str | Path, existing_skill: str | Path) -> Path:
-    source_path = Path(source)
     skill_path = Path(existing_skill)
-    report = analyze_source(source_path)
+    report = analyze_source(source)
     seeds = skill_path / "seeds"
     seeds.mkdir(parents=True, exist_ok=True)
     target = seeds / f"{slugify(report.title)}-seed.md"

@@ -57,6 +57,12 @@ Analyze first:
 source-to-skill analyze examples/article.md
 ```
 
+Analyze a remote article:
+
+```bash
+source-to-skill analyze https://example.com/article
+```
+
 Build the recommended artifact:
 
 ```bash
@@ -126,10 +132,10 @@ Caution:
 
 ## Project Status
 
-This is an early project. It supports local UTF-8 text, Markdown, and simple
-HTML sources. PDF, EPUB, web pages, and audio transcription are intentionally
-left for later intake plugins. The first job is to get the skill-worthiness gate
-right.
+This is an early project. It supports local UTF-8 text, Markdown, simple HTML,
+and single-page remote text/HTML URLs. PDF, EPUB, crawled websites, browser-only
+pages, and audio transcription are intentionally left for later intake plugins.
+The first job is to get the skill-worthiness gate right.
 
 ## Design Principles
 
@@ -141,7 +147,8 @@ right.
 
 See [docs/philosophy.md](docs/philosophy.md) and
 [docs/output-levels.md](docs/output-levels.md). The scoring rules are documented
-in [docs/scoring.md](docs/scoring.md). Transcript cleanup is documented in
+in [docs/scoring.md](docs/scoring.md). Intake support is documented in
+[docs/intake.md](docs/intake.md). Transcript cleanup is documented in
 [docs/transcripts.md](docs/transcripts.md). Skill evidence checks are documented
 in [docs/evaluation.md](docs/evaluation.md).
 
