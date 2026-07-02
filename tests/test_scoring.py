@@ -57,6 +57,40 @@ def test_short_structured_source_does_not_become_full():
     assert report.level != OutputLevel.FULL
 
 
+def test_long_structured_source_can_become_full():
+    sections = []
+    for i in range(40):
+        sections.append(
+            f"""
+            ## Pattern {i}
+
+            When the source repeats across projects, use a clear decision rule
+            because future agents need stable criteria. Prefer evidence before
+            generation. Avoid promoting one-off context into a permanent skill.
+            For example, a source bundle can include a rule, a scenario, a
+            failure mode, and a checklist. The next time this task appears, the
+            agent should check the evidence and apply the rule only when the
+            scenario matches.
+
+            - Use the rule when the user task matches the source topic.
+            - Prefer a seed when examples are thin.
+            - Avoid claims that the evidence does not support.
+            - Check the workflow, decision, criteria, and future reuse case.
+            """
+        )
+    report = analyze_text("# Long Playbook\n\n" + "\n".join(sections))
+    assert report.word_count > 2500
+    assert report.level == OutputLevel.FULL
+
+
 def test_sensitive_content_adds_caution():
     report = analyze_text("# Notes\n\nThis private client note includes a secret.")
     assert any("sensitive" in caution.lower() for caution in report.cautions)
+
+
+def test_report_serializes_to_dict():
+    report = analyze_text("# Method\n\nWhen this repeats, use a checklist.")
+    data = report.to_dict()
+    assert data["title"] == "Method"
+    assert data["level"] == report.level.value
+    assert data["signals"][0]["name"] == "Source depth"

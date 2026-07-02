@@ -119,7 +119,17 @@ plugins. The first job is to get the skill-worthiness gate right.
 - Make the generated artifact small enough to be read and reviewed.
 
 See [docs/philosophy.md](docs/philosophy.md) and
-[docs/output-levels.md](docs/output-levels.md).
+[docs/output-levels.md](docs/output-levels.md). The scoring rules are documented
+in [docs/scoring.md](docs/scoring.md).
+
+## Roadmap
+
+See [ROADMAP.md](ROADMAP.md).
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md). The short version: improve the gate, do
+not make weak sources look stronger than they are.
 
 ## License
 
