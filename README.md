@@ -4,7 +4,7 @@
 
 # source-to-skill
 
-[![CI](https://github.com/qiaozhi7426-gif/source-to-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/qiaozhi7426-gif/source-to-skill/actions/workflows/ci.yml)
+[![CI](https://github.com/GeoLab-org/source-to-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/GeoLab-org/source-to-skill/actions/workflows/ci.yml)
 
 Not every document deserves a skill.
 
@@ -44,7 +44,7 @@ scope, and an output contract.
 ## Install
 
 ```bash
-git clone https://github.com/qiaozhi7426-gif/source-to-skill.git
+git clone https://github.com/GeoLab-org/source-to-skill.git
 cd source-to-skill
 python -m pip install -e .
 ```

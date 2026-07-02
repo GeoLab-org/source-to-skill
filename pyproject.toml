@@ -24,8 +24,8 @@ classifiers = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/qiaozhi7426-gif/source-to-skill"
-Issues = "https://github.com/qiaozhi7426-gif/source-to-skill/issues"
+Homepage = "https://github.com/GeoLab-org/source-to-skill"
+Issues = "https://github.com/GeoLab-org/source-to-skill/issues"
 
 [project.scripts]
 source-to-skill = "source_to_skill.cli:main"
