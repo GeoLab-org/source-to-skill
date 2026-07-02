@@ -10,7 +10,7 @@ from source_to_skill.audio import SUPPORTED_TRANSCRIPT_FORMATS, transcribe_audio
 from source_to_skill.builder import build_artifacts, fold_seed
 from source_to_skill.evaluator import evaluate_skill, render_eval_report
 from source_to_skill.models import OutputLevel
-from source_to_skill.segmenter import write_split_artifacts
+from source_to_skill.segmenter import build_segment, fold_segment, write_split_artifacts
 from source_to_skill.templates import render_report
 from source_to_skill.transcript import clean_transcript_file
 
@@ -45,6 +45,22 @@ def build_parser() -> argparse.ArgumentParser:
     split.add_argument("source", help="path or URL to a source")
     split.add_argument("--out", required=True, help="output directory for topic-report.md and segment files")
     split.add_argument("--json", action="store_true", help="print a machine-readable split report")
+
+    build_segment_parser = subparsers.add_parser("build-segment", help="build artifacts from a split-source segment")
+    build_segment_parser.add_argument("split_dir", help="directory created by split-source")
+    build_segment_parser.add_argument("index", type=int, help="1-based segment index to build")
+    build_segment_parser.add_argument("--out", default="out", help="output directory (default: out)")
+    build_segment_parser.add_argument(
+        "--level",
+        default="auto",
+        choices=["auto", *[level.value for level in OutputLevel]],
+        help="artifact level to generate (default: auto)",
+    )
+
+    fold_segment_parser = subparsers.add_parser("fold-segment", help="fold a split-source segment into an existing skill")
+    fold_segment_parser.add_argument("split_dir", help="directory created by split-source")
+    fold_segment_parser.add_argument("index", type=int, help="1-based segment index to fold")
+    fold_segment_parser.add_argument("skill", help="path to an existing skill folder")
 
     clean = subparsers.add_parser("clean-transcript", help="clean transcript, SRT, or VTT text into Markdown")
     clean.add_argument("source", help="path to a transcript-like text file")
@@ -98,6 +114,14 @@ def main(argv: list[str] | None = None) -> int:
                 print(json.dumps(result.to_dict(), ensure_ascii=False, indent=2))
             else:
                 print(f"Split source into {len(result.segments)} segments at {result.output_dir}")
+            return 0
+        if args.command == "build-segment":
+            target = build_segment(args.split_dir, args.index, args.out, level=args.level)
+            print(f"Built segment {args.index} into {target}")
+            return 0
+        if args.command == "fold-segment":
+            target = fold_segment(args.split_dir, args.index, args.skill)
+            print(f"Folded segment {args.index} into {target}")
             return 0
         if args.command == "clean-transcript":
             result = clean_transcript_file(args.source, title=args.title)

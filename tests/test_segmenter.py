@@ -111,3 +111,57 @@ def test_split_source_cli_can_print_json(tmp_path, capsys):
     assert payload["segment_count"] == 2
     assert payload["segments"][1]["title"] == "Useful Rule"
     assert (tmp_path / "split" / "segments" / "02-useful-rule.md").exists()
+
+
+def test_build_segment_cli_builds_selected_segment(tmp_path):
+    source = tmp_path / "meeting.md"
+    source.write_text(
+        """
+        # Meeting
+
+        ## Thin Context
+
+        No reusable decision.
+
+        ## Useful Rule
+
+        When a source has repeatable decisions, split it into smaller topics.
+        Each topic should be scored before it is promoted into a skill.
+        """,
+        encoding="utf-8",
+    )
+    split_dir = tmp_path / "split"
+    write_split_artifacts(source, split_dir)
+
+    result = main(["build-segment", str(split_dir), "2", "--out", str(tmp_path / "built"), "--level", "seed"])
+
+    assert result == 0
+    assert (tmp_path / "built" / "useful-rule" / "skill-seed.md").exists()
+
+
+def test_fold_segment_cli_folds_selected_segment_into_existing_skill(tmp_path):
+    source = tmp_path / "meeting.md"
+    source.write_text(
+        """
+        # Meeting
+
+        ## Thin Context
+
+        No reusable decision.
+
+        ## Useful Rule
+
+        When a source has repeatable decisions, split it into smaller topics.
+        Each topic should be scored before it is promoted into a skill.
+        """,
+        encoding="utf-8",
+    )
+    split_dir = tmp_path / "split"
+    skill_dir = tmp_path / "existing-skill"
+    skill_dir.mkdir()
+    write_split_artifacts(source, split_dir)
+
+    result = main(["fold-segment", str(split_dir), "2", str(skill_dir)])
+
+    assert result == 0
+    assert (skill_dir / "seeds" / "useful-rule-seed.md").exists()

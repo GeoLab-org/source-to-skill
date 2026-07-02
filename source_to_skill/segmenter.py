@@ -76,6 +76,28 @@ def write_split_artifacts(source: str | Path, output_dir: str | Path) -> SplitAr
     return result
 
 
+def segment_path(split_dir: str | Path, index: int) -> Path:
+    segments_dir = Path(split_dir) / "segments"
+    matches = sorted(segments_dir.glob(f"{index:02d}-*.md"))
+    if not matches:
+        raise FileNotFoundError(f"No segment {index} found in {segments_dir}")
+    if len(matches) > 1:
+        raise ValueError(f"Multiple files matched segment {index} in {segments_dir}")
+    return matches[0]
+
+
+def build_segment(split_dir: str | Path, index: int, output_dir: str | Path, *, level: str = "auto") -> Path:
+    from source_to_skill.builder import build_artifacts
+
+    return build_artifacts(segment_path(split_dir, index), output_dir, level=level)
+
+
+def fold_segment(split_dir: str | Path, index: int, existing_skill: str | Path) -> Path:
+    from source_to_skill.builder import fold_seed
+
+    return fold_seed(segment_path(split_dir, index), existing_skill)
+
+
 def extract_heading_blocks(text: str) -> list[tuple[str, str]]:
     lines = text.splitlines()
     heading_indexes = [

@@ -24,6 +24,23 @@ For integrations:
 source-to-skill split-source out/recording-clean.md --out out/topics --json
 ```
 
+## Build Or Fold A Segment
+
+After reviewing `topic-report.md`, build only the segment that has enough signal:
+
+```bash
+source-to-skill build-segment out/topics 2 --level seed --out out
+```
+
+Or fold it into an existing skill:
+
+```bash
+source-to-skill fold-segment out/topics 2 ~/.codex/skills/design-review
+```
+
+The index is the 1-based segment number shown in `topic-report.md` and encoded
+in the segment filename, for example `segments/02-useful-rule.md`.
+
 ## When To Use
 
 Use splitting before building when the source is:

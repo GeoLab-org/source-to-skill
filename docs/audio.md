@@ -27,6 +27,7 @@ For long recordings, split the cleaned transcript before building:
 
 ```bash
 source-to-skill split-source out/recording-clean.md --out out/recording-topics
+source-to-skill build-segment out/recording-topics 2 --level seed --out out
 ```
 
 If the source is strong enough:

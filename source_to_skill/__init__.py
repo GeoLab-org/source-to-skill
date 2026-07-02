@@ -6,7 +6,7 @@ from source_to_skill.builder import build_artifacts
 from source_to_skill.evaluator import evaluate_skill
 from source_to_skill.intake import read_source
 from source_to_skill.models import OutputLevel, ReadinessReport
-from source_to_skill.segmenter import split_source_text
+from source_to_skill.segmenter import build_segment, fold_segment, split_source_text
 from source_to_skill.transcript import clean_transcript_file, clean_transcript_text
 
 __all__ = [
@@ -14,10 +14,12 @@ __all__ = [
     "ReadinessReport",
     "analyze_source",
     "analyze_text",
+    "build_segment",
     "build_artifacts",
     "clean_transcript_file",
     "clean_transcript_text",
     "evaluate_skill",
+    "fold_segment",
     "read_source",
     "split_source_text",
     "transcribe_audio_file",

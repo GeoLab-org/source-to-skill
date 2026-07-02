@@ -111,6 +111,13 @@ Split a long source into separately scored topic candidates:
 source-to-skill split-source out/clean-meeting.md --out out/topics
 ```
 
+Build or fold one useful segment:
+
+```bash
+source-to-skill build-segment out/topics 2 --level seed --out out
+source-to-skill fold-segment out/topics 2 ~/.codex/skills/design-review
+```
+
 ## What It Scores
 
 The v0 scorer is intentionally transparent. It looks for:
