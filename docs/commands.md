@@ -3,6 +3,12 @@
 `source-to-skill` is a conservative CLI. Most workflows should start with
 `analyze` or `demo`, not `build`.
 
+Install from GitHub:
+
+```bash
+python -m pip install "source-to-skill @ git+https://github.com/GeoLab-org/source-to-skill.git@v0.1.1"
+```
+
 Check the installed version:
 
 ```bash

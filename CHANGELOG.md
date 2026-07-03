@@ -2,6 +2,13 @@
 
 All notable changes to `source-to-skill` are recorded here.
 
+## 0.1.1
+
+- Bundled demo examples inside the installed package so `source-to-skill demo`
+  works from any directory.
+- Added wheel build and installed-wheel smoke checks to CI.
+- Documented direct GitHub installation with a pinned release tag.
+
 ## 0.1.0
 
 Initial public release.

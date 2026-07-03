@@ -6,7 +6,11 @@ Run the bundled demo after installing the package:
 source-to-skill demo --out out/demo
 ```
 
-The demo runs the public workflow against the examples included in the repo:
+The default demo uses examples bundled inside the installed package, so it can
+run from any working directory. You can pass `--examples path/to/examples` to
+use local files instead.
+
+The demo runs the public workflow against the bundled examples:
 
 - analyzes `examples/article.md`
 - builds an article seed

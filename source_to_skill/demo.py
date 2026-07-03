@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import shutil
 from dataclasses import dataclass
+from importlib import resources
 from pathlib import Path
 
 from source_to_skill.analyzer import analyze_source
@@ -22,9 +23,9 @@ class DemoResult:
     selected_segment_index: int
 
 
-def run_demo(output_dir: str | Path, *, examples_dir: str | Path = "examples") -> DemoResult:
+def run_demo(output_dir: str | Path, *, examples_dir: str | Path | None = None) -> DemoResult:
     out_path = Path(output_dir)
-    examples_path = Path(examples_dir)
+    examples_path = Path(examples_dir) if examples_dir is not None else bundled_examples_path()
     article = examples_path / "article.md"
     transcript = examples_path / "meeting-transcript.vtt"
     if not article.exists():
@@ -62,6 +63,10 @@ def run_demo(output_dir: str | Path, *, examples_dir: str | Path = "examples") -
     )
     (out_path / "demo-report.md").write_text(render_demo_report(result), encoding="utf-8")
     return result
+
+
+def bundled_examples_path() -> Path:
+    return Path(resources.files("source_to_skill").joinpath("examples"))
 
 
 def select_demo_segment(split_result) -> int:

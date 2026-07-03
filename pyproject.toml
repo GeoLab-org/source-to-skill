@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "source-to-skill"
-version = "0.1.0"
+version = "0.1.1"
 description = "Analyze source material and compile only reusable knowledge into agent skills."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -29,6 +29,13 @@ Issues = "https://github.com/GeoLab-org/source-to-skill/issues"
 
 [project.scripts]
 source-to-skill = "source_to_skill.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["source_to_skill"]
+
+[tool.hatch.build.targets.wheel.force-include]
+"source_to_skill/examples/article.md" = "source_to_skill/examples/article.md"
+"source_to_skill/examples/meeting-transcript.vtt" = "source_to_skill/examples/meeting-transcript.vtt"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

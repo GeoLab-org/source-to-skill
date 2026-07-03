@@ -6,4 +6,4 @@ def test_cli_prints_version(capsys):
 
     captured = capsys.readouterr()
     assert result == 0
-    assert captured.out.strip() == "source-to-skill 0.1.0"
+    assert captured.out.strip() == "source-to-skill 0.1.1"

@@ -62,3 +62,13 @@ def test_demo_cli_runs_workflow(tmp_path):
     assert result == 0
     assert (tmp_path / "demo" / "demo-report.md").exists()
     assert (tmp_path / "demo" / "topics" / "topic-report.md").exists()
+
+
+def test_demo_cli_uses_bundled_examples_by_default(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)
+
+    result = main(["demo", "--out", str(tmp_path / "demo")])
+
+    assert result == 0
+    assert (tmp_path / "demo" / "demo-report.md").exists()
+    assert (tmp_path / "demo" / "topics" / "topic-report.md").exists()

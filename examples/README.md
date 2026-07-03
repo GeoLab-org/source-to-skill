@@ -21,6 +21,13 @@ Run the complete example workflow:
 source-to-skill demo --out out/demo
 ```
 
+The command above uses the examples bundled inside the installed package. To run
+against this directory explicitly:
+
+```bash
+source-to-skill demo --out out/demo --examples examples
+```
+
 Analyze the article:
 
 ```bash

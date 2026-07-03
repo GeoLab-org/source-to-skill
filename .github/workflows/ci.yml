@@ -16,3 +16,13 @@ jobs:
         run: python -m pip install -e . pytest
       - name: Run tests
         run: python -m pytest -q
+      - name: Build wheel
+        run: |
+          python -m pip install build
+          python -m build
+      - name: Smoke test wheel
+        run: |
+          python -m venv /tmp/source-to-skill-wheel
+          /tmp/source-to-skill-wheel/bin/python -m pip install dist/*.whl
+          /tmp/source-to-skill-wheel/bin/source-to-skill --version
+          /tmp/source-to-skill-wheel/bin/source-to-skill demo --out /tmp/source-to-skill-demo

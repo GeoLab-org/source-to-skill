@@ -90,7 +90,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     demo = subparsers.add_parser("demo", help="run the bundled end-to-end demo workflow")
     demo.add_argument("--out", default="out/demo", help="output directory (default: out/demo)")
-    demo.add_argument("--examples", default="examples", help="examples directory (default: examples)")
+    demo.add_argument("--examples", help="optional examples directory override")
 
     return parser
 

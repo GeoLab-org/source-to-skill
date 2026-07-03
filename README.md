@@ -43,6 +43,15 @@ scope, and an output contract.
 
 ## Install
 
+Install directly from GitHub:
+
+```bash
+python -m pip install "source-to-skill @ git+https://github.com/GeoLab-org/source-to-skill.git@v0.1.1"
+source-to-skill --version
+```
+
+Or install an editable checkout for development:
+
 ```bash
 git clone https://github.com/GeoLab-org/source-to-skill.git
 cd source-to-skill
