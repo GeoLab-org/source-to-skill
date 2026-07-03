@@ -5,6 +5,7 @@ import json
 import sys
 from pathlib import Path
 
+from source_to_skill import __version__
 from source_to_skill.analyzer import analyze_source
 from source_to_skill.audio import SUPPORTED_TRANSCRIPT_FORMATS, transcribe_audio_file
 from source_to_skill.builder import build_artifacts, fold_seed
@@ -21,6 +22,7 @@ def build_parser() -> argparse.ArgumentParser:
         prog="source-to-skill",
         description="Analyze source material and compile only reusable knowledge into agent-skill artifacts.",
     )
+    parser.add_argument("--version", action="version", version=f"source-to-skill {__version__}")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     analyze = subparsers.add_parser("analyze", help="score a source before generating anything")
@@ -94,6 +96,9 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    if argv == ["--version"]:
+        print(f"source-to-skill {__version__}")
+        return 0
     parser = build_parser()
     args = parser.parse_args(argv)
     try:

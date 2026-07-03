@@ -47,6 +47,7 @@ scope, and an output contract.
 git clone https://github.com/GeoLab-org/source-to-skill.git
 cd source-to-skill
 python -m pip install -e .
+source-to-skill --version
 ```
 
 ## Usage
@@ -56,6 +57,9 @@ Run the bundled demo:
 ```bash
 source-to-skill demo --out out/demo
 ```
+
+See [docs/commands.md](docs/commands.md) for the full command reference and
+[examples/README.md](examples/README.md) for the bundled example workflow.
 
 Analyze first:
 
@@ -187,6 +191,10 @@ in [docs/scoring.md](docs/scoring.md). Intake support is documented in
 ## Roadmap
 
 See [ROADMAP.md](ROADMAP.md).
+
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md).
 
 ## Contributing
 
