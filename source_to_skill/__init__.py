@@ -3,6 +3,7 @@
 from source_to_skill.analyzer import analyze_source, analyze_text
 from source_to_skill.audio import transcribe_audio_file
 from source_to_skill.builder import build_artifacts
+from source_to_skill.demo import run_demo
 from source_to_skill.evaluator import evaluate_skill
 from source_to_skill.intake import read_source
 from source_to_skill.models import OutputLevel, ReadinessReport
@@ -21,6 +22,7 @@ __all__ = [
     "evaluate_skill",
     "fold_segment",
     "read_source",
+    "run_demo",
     "split_source_text",
     "transcribe_audio_file",
 ]

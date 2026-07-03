@@ -8,6 +8,7 @@ from pathlib import Path
 from source_to_skill.analyzer import analyze_source
 from source_to_skill.audio import SUPPORTED_TRANSCRIPT_FORMATS, transcribe_audio_file
 from source_to_skill.builder import build_artifacts, fold_seed
+from source_to_skill.demo import run_demo
 from source_to_skill.evaluator import evaluate_skill, render_eval_report
 from source_to_skill.models import OutputLevel
 from source_to_skill.segmenter import build_segment, fold_segment, write_split_artifacts
@@ -85,6 +86,10 @@ def build_parser() -> argparse.ArgumentParser:
     eval_skill.add_argument("--out", help="optional path to write eval-report.md")
     eval_skill.add_argument("--json", action="store_true", help="print a machine-readable evaluation report")
 
+    demo = subparsers.add_parser("demo", help="run the bundled end-to-end demo workflow")
+    demo.add_argument("--out", default="out/demo", help="output directory (default: out/demo)")
+    demo.add_argument("--examples", default="examples", help="examples directory (default: examples)")
+
     return parser
 
 
@@ -149,6 +154,10 @@ def main(argv: list[str] | None = None) -> int:
                 Path(args.out).write_text(rendered, encoding="utf-8")
             else:
                 print(rendered)
+            return 0
+        if args.command == "demo":
+            result = run_demo(args.out, examples_dir=args.examples)
+            print(f"Demo written to {result.output_dir}")
             return 0
     except Exception as exc:
         print(f"error: {exc}", file=sys.stderr)

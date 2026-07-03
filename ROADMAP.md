@@ -48,5 +48,6 @@ Goal: a small reliable tool that can be used in real agent workflows.
 - Stable CLI contract.
 - Stable JSON schema.
 - Better documented scoring.
+- Bundled end-to-end demo. Shipped.
 - Format adapters for common agent skill layouts.
 - Real examples from books, articles, interviews, and meetings.

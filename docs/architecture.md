@@ -27,6 +27,7 @@ local text / Markdown / HTML source or single remote text / HTML URL
 | `source_to_skill/templates.py` | render reports and generated artifacts |
 | `source_to_skill/evaluator.py` | compare generated guidance against evidence and render evaluation reports |
 | `source_to_skill/builder.py` | write artifacts to disk |
+| `source_to_skill/demo.py` | run the bundled end-to-end example workflow |
 | `source_to_skill/cli.py` | command-line interface |
 
 ## Later Intake Plugins

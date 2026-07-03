@@ -51,6 +51,12 @@ python -m pip install -e .
 
 ## Usage
 
+Run the bundled demo:
+
+```bash
+source-to-skill demo --out out/demo
+```
+
 Analyze first:
 
 ```bash
@@ -174,7 +180,8 @@ in [docs/scoring.md](docs/scoring.md). Intake support is documented in
 [docs/intake.md](docs/intake.md). Transcript cleanup is documented in
 [docs/transcripts.md](docs/transcripts.md). Audio transcription is documented in
 [docs/audio.md](docs/audio.md). Topic splitting is documented in
-[docs/splitting.md](docs/splitting.md). Skill evidence checks are documented in
+[docs/splitting.md](docs/splitting.md). The bundled demo is documented in
+[docs/demo.md](docs/demo.md). Skill evidence checks are documented in
 [docs/evaluation.md](docs/evaluation.md).
 
 ## Roadmap
