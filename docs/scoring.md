@@ -3,6 +3,11 @@
 The v0 scorer is deterministic and intentionally plain. It is a gate, not an
 oracle.
 
+The scorer includes English and Chinese cues for rule language, examples,
+transferability, and conversational noise. Chinese source length is estimated
+with CJK characters as effective tokens rather than only whitespace-delimited
+words.
+
 ## Signals
 
 | Signal | Max | Meaning |

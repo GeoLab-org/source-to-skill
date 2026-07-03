@@ -83,6 +83,29 @@ def test_long_structured_source_can_become_full():
     assert report.level == OutputLevel.FULL
 
 
+def test_long_structured_chinese_source_can_become_full():
+    sections = []
+    for i in range(40):
+        sections.append(
+            f"""
+            ## 模型 {i}
+
+            当资料在多个场景反复出现时，应该先提炼判断原则，因为未来的
+            agent 需要稳定标准。优先保留证据，避免把一次性的上下文变成
+            永久规则。比如，一个案例可以包含原则、场景、失败模式和检查清单。
+            下次遇到相似任务时，agent 应该检查证据，只在场景匹配时使用规则。
+
+            - 使用规则前先确认任务是否匹配。
+            - 案例不足时优先作为 seed。
+            - 避免提出证据不支持的结论。
+            - 检查流程、判断、标准和未来复用场景。
+            """
+        )
+    report = analyze_text("# 中文方法论\n\n" + "\n".join(sections))
+    assert report.word_count > 2500
+    assert report.level == OutputLevel.FULL
+
+
 def test_sensitive_content_adds_caution():
     report = analyze_text("# Notes\n\nThis private client note includes a secret.")
     assert any("sensitive" in caution.lower() for caution in report.cautions)

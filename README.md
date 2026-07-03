@@ -46,7 +46,7 @@ scope, and an output contract.
 Install directly from GitHub:
 
 ```bash
-python -m pip install "source-to-skill @ git+https://github.com/GeoLab-org/source-to-skill.git@v0.1.1"
+python -m pip install "source-to-skill @ git+https://github.com/GeoLab-org/source-to-skill.git@v0.2.0"
 source-to-skill --version
 ```
 
@@ -69,6 +69,7 @@ source-to-skill demo --out out/demo
 
 See [docs/commands.md](docs/commands.md) for the full command reference and
 [examples/README.md](examples/README.md) for the bundled example workflow.
+Case behavior is summarized in [docs/case-studies.md](docs/case-studies.md).
 
 Analyze first:
 
@@ -80,6 +81,12 @@ Analyze a remote article:
 
 ```bash
 source-to-skill analyze https://example.com/article
+```
+
+Analyze a local EPUB:
+
+```bash
+source-to-skill analyze path/to/book.epub
 ```
 
 Build the recommended artifact:
@@ -173,9 +180,9 @@ Caution:
 ## Project Status
 
 This is an early project. It supports local UTF-8 text, Markdown, simple HTML,
-single-page remote text/HTML URLs, transcript cleanup, and optional
+local EPUB, single-page remote text/HTML URLs, transcript cleanup, and optional
 Whisper-compatible audio transcription through an external CLI. It can split
-long sources into separately scored topic candidates before building. PDF, EPUB,
+long sources into separately scored topic candidates before building. PDF,
 crawled websites, and browser-only pages are intentionally left for later intake
 plugins. The first job is to get the skill-worthiness gate right.
 

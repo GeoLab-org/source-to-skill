@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "source-to-skill"
-version = "0.1.1"
+version = "0.2.0"
 description = "Analyze source material and compile only reusable knowledge into agent skills."
 readme = "README.md"
 requires-python = ">=3.10"

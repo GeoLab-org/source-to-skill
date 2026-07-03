@@ -78,16 +78,50 @@ def extract_title(text: str, source_path: Path | str | None) -> str:
 
 def extract_evidence(text: str, limit: int = 5) -> tuple[str, ...]:
     candidates = []
+    evidence_terms = (
+        "should",
+        "must",
+        "because",
+        "avoid",
+        "prefer",
+        "应该",
+        "必须",
+        "因为",
+        "避免",
+        "优先",
+        "原则",
+        "规则",
+        "案例",
+    )
     for paragraph in re.split(r"\n\s*\n", text):
         compact = " ".join(paragraph.split())
         if len(compact) < 60 or len(compact) > 360:
             continue
+        if is_front_matter(compact):
+            continue
         lower = compact.lower()
-        if any(term in lower for term in ("should", "must", "when", "if", "because", "avoid", "prefer")):
+        if any(term in lower for term in evidence_terms):
             candidates.append(compact)
         if len(candidates) >= limit:
             break
     return tuple(candidates)
+
+
+def is_front_matter(text: str) -> bool:
+    front_matter_terms = (
+        "版权",
+        "copyright",
+        "目录",
+        "contents",
+        "致谢",
+        "acknowledg",
+        "译者",
+        "推荐序",
+        "赞誉",
+        "isbn",
+    )
+    lower = text.lower()
+    return any(term in lower for term in front_matter_terms)
 
 
 def build_reasons(signals) -> tuple[str, ...]:
@@ -101,7 +135,8 @@ def build_cautions(score: int, text: str, word_count: int) -> tuple[str, ...]:
         cautions.append("Short sources usually make better seeds than standalone full skills.")
     if score < 60:
         cautions.append("Do not publish this as a full skill without more material or stronger examples.")
-    if re.search(r"\b(confidential|private|salary|password|secret|api key|token)\b", text, re.IGNORECASE):
+    sensitive_re = r"\b(confidential|salary|password|secret|api key|token)\b|private\s+(client|note|key|token|data)"
+    if re.search(sensitive_re, text, re.IGNORECASE):
         cautions.append("Potentially sensitive material detected; review before publishing.")
     if not cautions:
         cautions.append("Review the generated skill before relying on it in real work.")

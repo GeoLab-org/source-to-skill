@@ -20,7 +20,8 @@ Goal: normalize more source types into text before scoring.
 - Local HTML intake. Shipped.
 - Remote HTML / article intake. Shipped.
 - Transcript cleanup command. Shipped.
-- PDF and EPUB intake.
+- EPUB intake. Shipped.
+- PDF intake.
 - Keep extraction separate from scoring.
 
 ## v0.3: Skill Quality Evaluation

@@ -6,7 +6,7 @@
 Install from GitHub:
 
 ```bash
-python -m pip install "source-to-skill @ git+https://github.com/GeoLab-org/source-to-skill.git@v0.1.1"
+python -m pip install "source-to-skill @ git+https://github.com/GeoLab-org/source-to-skill.git@v0.2.0"
 ```
 
 Check the installed version:
@@ -43,6 +43,12 @@ Score a local source:
 ```bash
 source-to-skill analyze examples/article.md
 source-to-skill analyze examples/article.md --json
+```
+
+Score a local EPUB:
+
+```bash
+source-to-skill analyze path/to/book.epub
 ```
 
 Build only after reading the score:

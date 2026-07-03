@@ -6,7 +6,7 @@ from source_to_skill.models import OutputLevel, ReadinessReport
 
 
 def slugify(value: str) -> str:
-    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    slug = re.sub(r"[^\w]+", "-", value.lower(), flags=re.UNICODE).strip("-_")
     return slug or "source-skill"
 
 

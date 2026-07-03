@@ -2,6 +2,14 @@
 
 All notable changes to `source-to-skill` are recorded here.
 
+## 0.2.0
+
+- Added local EPUB intake using package metadata and spine XHTML chapters.
+- Improved Chinese source scoring with CJK-aware length estimates and Chinese
+  rule, example, transferability, and noise cues.
+- Preserved Unicode titles in generated artifact paths.
+- Tightened evidence candidate extraction to skip common front matter.
+
 ## 0.1.1
 
 - Bundled demo examples inside the installed package so `source-to-skill demo`

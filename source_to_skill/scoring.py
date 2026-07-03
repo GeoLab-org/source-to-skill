@@ -6,20 +6,25 @@ from source_to_skill.models import OutputLevel, Signal
 
 
 HEADING_RE = re.compile(r"^\s{0,3}(#{1,6}\s+.+|[A-Z][^\n]{3,80}\n[-=]{3,})", re.MULTILINE)
+CJK_RE = re.compile(r"[\u3400-\u4dbf\u4e00-\u9fff]")
 ACTION_RE = re.compile(
-    r"\b(should|must|avoid|prefer|use|when|if|because|therefore|rule|principle|pattern|framework)\b",
+    r"\b(should|must|avoid|prefer|use|when|if|because|therefore|rule|principle|pattern|framework)\b"
+    r"|应该|必须|避免|优先|使用|当|如果|因为|因此|规则|原则|模式|框架|判断|标准|检查",
     re.IGNORECASE,
 )
 EXAMPLE_RE = re.compile(
-    r"\b(example|case|for instance|before|after|scenario|sample|evidence|story)\b",
+    r"\b(example|case|for instance|before|after|scenario|sample|evidence|story)\b"
+    r"|例如|比如|案例|场景|样本|证据|故事|前后|失败模式",
     re.IGNORECASE,
 )
 TRANSFER_RE = re.compile(
-    r"\b(reuse|repeat|whenever|in future|next time|workflow|playbook|checklist|decision|criteria)\b",
+    r"\b(reuse|repeat|whenever|in future|next time|workflow|playbook|checklist|decision|criteria)\b"
+    r"|复用|重复|每当|未来|下次|流程|工作流|清单|决策|判断|标准|方法论|可迁移",
     re.IGNORECASE,
 )
 NOISE_RE = re.compile(
-    r"\b(um|uh|haha|lol|okay okay|you know|sort of|kind of|anyway|meeting adjourned)\b",
+    r"\b(um|uh|haha|lol|okay okay|you know|sort of|kind of|anyway|meeting adjourned)\b"
+    r"|嗯|呃|哈哈|然后呢|就是说|你知道|差不多|散会",
     re.IGNORECASE,
 )
 
@@ -29,7 +34,8 @@ def clamp(value: int, floor: int = 0, ceiling: int = 100) -> int:
 
 
 def count_words(text: str) -> int:
-    return len(re.findall(r"\b[\w'-]+\b", text))
+    ascii_words = re.findall(r"\b[a-zA-Z0-9][a-zA-Z0-9'-]*\b", text)
+    return len(ascii_words) + len(CJK_RE.findall(text))
 
 
 def count_headings(text: str) -> int:
