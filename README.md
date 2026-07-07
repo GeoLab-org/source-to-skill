@@ -6,38 +6,49 @@
 
 [![CI](https://github.com/GeoLab-org/source-to-skill/actions/workflows/ci.yml/badge.svg)](https://github.com/GeoLab-org/source-to-skill/actions/workflows/ci.yml)
 
-Turn high-value long-form content into evolving AI skills.
+**English** | [简体中文](README.zh-CN.md)
 
-把书、长视频、播客、访谈、课程、长文和资料集里真正可复用的方法论，沉淀进 AI agent 可以调用、可以审查、可以持续进化的 skill system。
+Saved content is not knowledge. Callable methods are.
 
 You have saved the videos, read the books, clipped the podcasts, and collected
-the PDFs. But when real work starts, most of that knowledge is still hard to use.
+the PDFs. The moment you saved them, they felt useful. A week later, real work
+starts, and most of them have become a vague feeling: "I think I saw something
+about this."
 
-`source-to-skill` is an early open-source compiler for turning high-value source
-material into the smallest useful skill-system update: a note, evidence, a skill
-seed, a focused skill, or a proposed update to an existing skill.
+`source-to-skill` is for that gap.
 
-Sources do not become skills by default.
+It is an early open-source compiler for turning high-value source material into
+the smallest useful skill-system update: a note, evidence, a skill seed, a
+focused skill, or a proposed update to an existing skill.
 
-内容默认不是 skill。内容先成为证据、增量或种子。只有稳定、可迁移、经过测试的方法，才应该升级成 skill。
+Sources do not become skills by default. Sources become evidence, deltas, or
+seeds first. Only stable, transferable, well-tested methods should become
+skills.
 
 It is not a summarizer.
-
-摘要告诉你内容讲了什么。Skill 让 AI 在真实任务里调用这套方法。
 
 Summaries tell you what the content said. Skills help an agent use the content
 to do work. A skill system should also learn when a new source confirms,
 refines, contradicts, or supersedes what it already knows.
 
+The goal is not to make more notes. The goal is to keep useful methods alive
+long enough for an agent to apply, challenge, and improve them.
+
 ![Source to Skill flow](assets/hero-diagram.svg)
 
 ## Why
 
-Most AI tools summarize content. `source-to-skill` asks a stricter question:
+Most AI tools answer the first question:
 
-Can this source improve a method an agent can actually use?
+> What did this content say?
 
-大多数内容工具把长内容压缩成摘要。但很多时候，真正的问题不是“我知不知道它讲了什么”，而是“我能不能在工作里用起来”。
+`source-to-skill` asks the more useful question:
+
+> Can this source improve a method an agent can actually use?
+
+That difference matters. A good summary can still leave the source trapped in a
+note. A useful skill should change how an agent behaves when the next real task
+arrives.
 
 A good source may contain frameworks, principles, decision rules, examples,
 anti-patterns, and operating steps. A good skill should preserve those methods
@@ -53,11 +64,44 @@ source should not become a confident-looking fake methodology. A related source
 should usually become evidence, a refinement, or a pending update before it
 becomes a brand-new skill.
 
+In plain words:
+
+```text
+Do not turn every source into a skill.
+Do not turn every insight into a new file.
+Find the durable method, preserve the evidence, and evolve the existing skill
+system only when the update survives review.
+```
+
+## Use It When
+
+Use `source-to-skill` when you have content that feels too valuable to leave in
+a bookmark, but too dangerous to blindly promote into agent behavior.
+
+Good candidates:
+
+- a long video that explains a real operating method
+- a podcast or interview with repeatable judgment
+- a book, course, or article series with a clear framework
+- a technical or business blog that refines an existing rule
+- a document set that contains reusable workflows, checks, or failure modes
+
+Not great candidates:
+
+- news you only need once
+- motivational content with no operating method
+- short opinion fragments
+- local meeting notes with missing context
+- anything you cannot verify with evidence
+
+The useful moment is when a source stops being "something I watched" and becomes
+"something my agent can apply next time."
+
 ## Why Not Just Summarize?
 
 A summary compresses content. A skill operationalizes it.
 
-普通总结可能会说：
+A summary might say:
 
 > The speaker says products need clear positioning, user understanding, and
 > differentiation.
@@ -71,7 +115,9 @@ A skill should make the method usable:
 - what evidence from the source supports the method
 - where the method should not be used
 
-这也是项目最核心的边界：不是把所有内容都包装成知识，也不是一篇内容生成一个 skill，而是让值得蒸馏的内容持续修正、补充和进化已有的能力系统。
+The boundary matters: do not package everything as knowledge, and do not create
+one skill per source. Let valuable sources refine, challenge, and evolve the
+existing skill system.
 
 ## What Makes A Source Skill-Worthy?
 
@@ -94,13 +140,15 @@ A source is usually not a good candidate when it is mostly:
 - one-off meeting context
 - unstructured personal notes
 
-不是所有 source 都值得变成 skill。这个保守判断本身就是产品的一部分。
+Not every source deserves a skill. This conservative gate is part of the
+product.
 
 ## Source To Delta, Not Source To Pile
 
 The long-term direction is not "one source, one skill."
 
-一篇博客、一场访谈、一个长视频，不应该默认生成一个新 skill。否则 skill 会越来越多、越来越重复、越来越难路由，最后变成另一个混乱的知识库。
+A blog post, interview, or long video should not create a new skill by default.
+That would produce too many overlapping, conflicting, hard-to-route skills.
 
 Instead, each source should be classified by how it relates to the existing
 skill system:
@@ -116,10 +164,6 @@ skill system:
 New sources should become deltas first: evidence, refinements, contradictions,
 or seeds. Only stable, reusable, well-tested patterns should become standalone
 skills.
-
-中文一句话：
-
-> 内容先进化已有 skill，只有少数内容才创建新 skill。
 
 ## Skill Evolution Workflow
 
@@ -169,21 +213,6 @@ challenge every proposed skill or update from two directions:
    method, and use case, or is it just adding attractive noise?
 2. **Adversarial review**: where could this guidance fail, overgeneralize,
    contradict existing rules, or pretend to be better-supported than it is?
-
-第一性原理测试负责问：
-
-- 这个 skill 到底要帮 agent 做什么？
-- 这条新规则是否真的服务这个核心任务？
-- 它是方法的一部分，还是只是一个好看的观点？
-- 换一个 source / 作者 / 场景后，它还能成立吗？
-
-对抗式审查负责问：
-
-- 有什么反例会击穿这条规则？
-- 它和已有 skill 有没有冲突？
-- 它是不是把一个局部案例包装成通用方法？
-- 证据是否足够，还是 AI 自己补全了作者没说的话？
-- 适用边界、失败条件、不要使用的场景是否清楚？
 
 Proposed updates should pass these checks before they modify core guidance.
 Otherwise they should stay as evidence, pending notes, contradictions, or
@@ -240,18 +269,11 @@ meeting may only deserve a note. A short clip may only contain one useful seed.
 A blog post may only refine an existing rule. A book, course, article series, or
 dense expert interview may deserve a real skill toolkit.
 
-中文理解：
-
-- `Note`: 有信息，但还不是方法。
-- `Skill Seed`: 有一两个可复用判断，适合并入已有 skill。
-- `Mini Skill`: 有一个聚焦的方法，证据和边界基本清楚。
-- `Full Skill`: 内容足够系统，可以独立成为工具包。
-
 Future evolution levels should also include:
 
-- `Evidence`: 支持已有判断，但不改核心方法。
-- `Refinement`: 修正或精确化已有 skill。
-- `Contradiction`: 和已有 skill 冲突，需要用户确认。
+- `Evidence`: supports existing guidance without changing the core method
+- `Refinement`: sharpens or corrects an existing skill
+- `Contradiction`: conflicts with an existing skill and requires user review
 
 ## Install
 
@@ -422,8 +444,6 @@ The current CLI can already build and fold skill artifacts. The evolution layer
 described above is the next product direction: source-to-delta, skill matching,
 first-principles tests, adversarial review, user-reviewed updates, and skill
 regression checks.
-
-项目还早，但问题是真实的：我们每天都在消费高价值内容，却很少把它们变成 AI 可以在真实任务里调用、并且持续进化的能力。
 
 ## Design Principles
 
