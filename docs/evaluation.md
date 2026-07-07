@@ -20,6 +20,11 @@ Each guidance bullet is marked:
 This is a lexical check. It is useful for catching obvious drift, but it is not
 a proof that a claim is true.
 
+For updates that change agent behavior, use
+[review-gates.md](review-gates.md) after this evidence check. The evaluator can
+flag weak support, but first-principles and adversarial review decide whether a
+claim belongs in the skill at all.
+
 ## Command
 
 ```bash
@@ -45,3 +50,12 @@ Mini Skill and Full Skill builds write `eval-report.md` automatically.
 Treat `weak` and `unsupported` rows as a prompt to revise or delete the guidance,
 not as a prompt to add decorative evidence. If the source does not support a
 claim, the claim should not be promoted into the skill.
+
+If a claim is supported but changes core behavior, keep it pending until it also
+passes the review gates:
+
+- first-principles fit
+- counterexamples
+- contradiction review
+- overgeneralization check
+- boundary and failure-case review

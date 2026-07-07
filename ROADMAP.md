@@ -3,6 +3,11 @@
 `source-to-skill` is intentionally starting with a small core: local text,
 readiness scoring, and multi-level artifact generation.
 
+The long-term direction is not "one source, one skill." The long-term direction
+is source-to-delta: new sources should become evidence, refinements,
+contradictions, seeds, or new skills depending on how they relate to the
+existing skill system.
+
 ## v0.1: Readiness Gate
 
 Status: shipped.
@@ -52,3 +57,48 @@ Goal: a small reliable tool that can be used in real agent workflows.
 - Bundled end-to-end demo. Shipped.
 - Format adapters for common agent skill layouts.
 - Real examples from books, articles, interviews, and meetings.
+
+## v1.1: Skill Evolution Layer
+
+Goal: prevent skill sprawl by updating existing skills before creating new ones.
+See `docs/review-gates.md` for the first-principles and adversarial review
+model this layer should use.
+
+- Skill metadata scanner for existing skill folders.
+- Source-to-skill matching by domain, title, use case, and evidence overlap.
+- Relationship classifier:
+  - duplicate
+  - evidence
+  - refinement
+  - contradiction
+  - new skill
+- Pending update artifacts under `evolution/pending-updates/`.
+- Human review flow for contradictions and major rewrites.
+- First-principles review:
+  - core problem
+  - core method
+  - use case
+  - boundary
+- Adversarial review:
+  - counterexamples
+  - contradictions
+  - overgeneralization
+  - missing evidence
+  - unsafe merge risk
+- Changelog entries for accepted updates.
+- Re-run evidence and regression checks after a skill evolves.
+
+## v1.2: Skill Router Inputs
+
+Goal: make large skill libraries easier for agents to use.
+
+- Generate or update skill metadata:
+  - `use_when`
+  - `do_not_use_when`
+  - domains
+  - trigger signals
+  - maturity
+  - confidence
+- Create a lightweight skill index for routing.
+- Recommend the smallest relevant skill set for a user task.
+- Avoid loading every skill into the agent context.
