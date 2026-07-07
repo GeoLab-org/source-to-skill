@@ -6,14 +6,15 @@
     <text x="48" y="48" font-size="18" font-weight="700" fill="#24312f">source-to-skill</text>
     <text x="48" y="76" font-size="14" fill="#63736f">analyze first, generate only when the source is ready</text>
 
-    <g transform="translate(48 108)">
-      <rect width="172" height="88" rx="8" fill="#ffffff" stroke="#cbd7d4"/>
-      <text x="20" y="31" font-size="15" font-weight="700" fill="#24312f">Sources</text>
-      <text x="20" y="56" font-size="13" fill="#63736f">books · notes</text>
-      <text x="20" y="75" font-size="13" fill="#63736f">transcripts</text>
+    <g transform="translate(48 100)">
+      <rect width="188" height="104" rx="8" fill="#ffffff" stroke="#cbd7d4"/>
+      <text x="20" y="30" font-size="15" font-weight="700" fill="#24312f">Sources</text>
+      <text x="20" y="55" font-size="12" fill="#63736f">books</text>
+      <text x="20" y="73" font-size="12" fill="#63736f">notes</text>
+      <text x="20" y="91" font-size="12" fill="#63736f">audio</text>
     </g>
 
-    <path d="M244 152h80" stroke="#9aa9a5" stroke-width="3" stroke-linecap="round"/>
+    <path d="M260 152h64" stroke="#9aa9a5" stroke-width="3" stroke-linecap="round"/>
     <path d="M315 143l13 9-13 9" fill="none" stroke="#9aa9a5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 
     <g transform="translate(348 96)">
