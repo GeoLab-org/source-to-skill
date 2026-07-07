@@ -6,13 +6,14 @@
     <text x="48" y="48" font-size="18" font-weight="700" fill="#24312f">source-to-skill</text>
     <text x="48" y="76" font-size="14" fill="#63736f">analyze first, generate only when the source is ready</text>
 
-    <g transform="translate(48 116)">
-      <rect width="160" height="72" rx="8" fill="#ffffff" stroke="#cbd7d4"/>
+    <g transform="translate(48 108)">
+      <rect width="172" height="88" rx="8" fill="#ffffff" stroke="#cbd7d4"/>
       <text x="20" y="31" font-size="15" font-weight="700" fill="#24312f">Sources</text>
-      <text x="20" y="54" font-size="13" fill="#63736f">books · notes · transcripts</text>
+      <text x="20" y="56" font-size="13" fill="#63736f">books · notes</text>
+      <text x="20" y="75" font-size="13" fill="#63736f">transcripts</text>
     </g>
 
-    <path d="M232 152h92" stroke="#9aa9a5" stroke-width="3" stroke-linecap="round"/>
+    <path d="M244 152h80" stroke="#9aa9a5" stroke-width="3" stroke-linecap="round"/>
     <path d="M315 143l13 9-13 9" fill="none" stroke="#9aa9a5" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
 
     <g transform="translate(348 96)">
@@ -27,11 +28,12 @@
 
     <g transform="translate(702 84)">
       <rect width="210" height="136" rx="10" fill="#24312f"/>
-      <text x="24" y="34" font-size="16" font-weight="700" fill="#ffffff">Smallest useful output</text>
-      <text x="24" y="63" font-size="13" fill="#d9f4ee">Note</text>
-      <text x="24" y="86" font-size="13" fill="#d9f4ee">Skill Seed</text>
-      <text x="24" y="109" font-size="13" fill="#d9f4ee">Mini Skill</text>
-      <text x="24" y="132" font-size="13" fill="#d9f4ee">Full Skill</text>
+      <text x="24" y="32" font-size="16" font-weight="700" fill="#ffffff">Smallest useful</text>
+      <text x="24" y="54" font-size="16" font-weight="700" fill="#ffffff">output</text>
+      <text x="24" y="82" font-size="13" fill="#d9f4ee">Note</text>
+      <text x="24" y="104" font-size="13" fill="#d9f4ee">Skill Seed</text>
+      <text x="24" y="126" font-size="13" fill="#d9f4ee">Mini Skill</text>
+      <text x="24" y="148" font-size="13" fill="#d9f4ee">Full Skill</text>
     </g>
   </g>
 </svg>
