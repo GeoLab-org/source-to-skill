@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "source-to-skill"
-version = "0.2.0"
+version = "0.3.0"
 description = "Analyze source material and compile only reusable knowledge into agent skills."
 readme = "README.md"
 requires-python = ">=3.10"
@@ -36,6 +36,8 @@ packages = ["source_to_skill"]
 [tool.hatch.build.targets.wheel.force-include]
 "source_to_skill/examples/article.md" = "source_to_skill/examples/article.md"
 "source_to_skill/examples/meeting-transcript.vtt" = "source_to_skill/examples/meeting-transcript.vtt"
+"examples/existing-skill/review-playbook-skill/SKILL.md" = "source_to_skill/examples/existing-skill/review-playbook-skill/SKILL.md"
+"examples/existing-skill/review-playbook-skill/references/evidence.md" = "source_to_skill/examples/existing-skill/review-playbook-skill/references/evidence.md"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

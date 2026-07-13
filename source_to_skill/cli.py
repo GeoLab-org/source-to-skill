@@ -11,6 +11,7 @@ from source_to_skill.audio import SUPPORTED_TRANSCRIPT_FORMATS, transcribe_audio
 from source_to_skill.builder import build_artifacts, fold_seed
 from source_to_skill.demo import run_demo
 from source_to_skill.evaluator import evaluate_skill, render_eval_report
+from source_to_skill.evolution import create_evolution_report, evolve_source
 from source_to_skill.models import OutputLevel
 from source_to_skill.segmenter import build_segment, fold_segment, write_split_artifacts
 from source_to_skill.templates import render_report
@@ -43,6 +44,12 @@ def build_parser() -> argparse.ArgumentParser:
     fold = subparsers.add_parser("fold", help="add a source as a seed under an existing skill")
     fold.add_argument("source", help="path to a UTF-8 text or Markdown source")
     fold.add_argument("skill", help="path to an existing skill folder")
+
+    evolve = subparsers.add_parser("evolve", help="compare a source with an existing skill and write a pending update")
+    evolve.add_argument("source", help="path or URL to a source")
+    evolve.add_argument("skill", help="path to an existing skill folder")
+    evolve.add_argument("--out", default="out", help="output directory (default: out)")
+    evolve.add_argument("--json", action="store_true", help="print the relationship report as JSON without writing files")
 
     split = subparsers.add_parser("split-source", help="split a long source into separately scored topic candidates")
     split.add_argument("source", help="path or URL to a source")
@@ -117,6 +124,14 @@ def main(argv: list[str] | None = None) -> int:
         if args.command == "fold":
             target = fold_seed(args.source, args.skill)
             print(f"Added seed {target}")
+            return 0
+        if args.command == "evolve":
+            if args.json:
+                report = create_evolution_report(args.source, args.skill)
+                print(json.dumps(report.to_dict(), ensure_ascii=False, indent=2))
+            else:
+                target = evolve_source(args.source, args.skill, args.out)
+                print(f"Created pending update {target}")
             return 0
         if args.command == "split-source":
             result = write_split_artifacts(args.source, args.out)

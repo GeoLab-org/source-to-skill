@@ -6,7 +6,7 @@
 Install from GitHub:
 
 ```bash
-python -m pip install "source-to-skill @ git+https://github.com/GeoLab-org/source-to-skill.git@v0.2.0"
+python -m pip install "source-to-skill @ git+https://github.com/GeoLab-org/source-to-skill.git@v0.3.0"
 ```
 
 Check the installed version:
@@ -23,6 +23,7 @@ source-to-skill --version
 | `analyze` | Score one source before generating files | readiness report or JSON |
 | `build` | Generate the recommended artifact level, or a forced level | note, seed, mini skill, or full skill |
 | `fold` | Add a weak source as a seed under an existing skill | seed file in an existing skill folder |
+| `evolve` | Compare a source with an existing skill before merging | pending update report or JSON |
 | `split-source` | Split a long source into topic candidates | `topic-report.md` and segment files |
 | `build-segment` | Build artifacts from one split segment | segment-derived artifact |
 | `fold-segment` | Fold one split segment into an existing skill | segment seed in an existing skill folder |
@@ -56,6 +57,17 @@ Build only after reading the score:
 ```bash
 source-to-skill build examples/article.md --level auto --out out
 ```
+
+Compare a new source with an existing skill before changing the skill:
+
+```bash
+source-to-skill evolve examples/article.md \
+  examples/existing-skill/review-playbook-skill \
+  --out out/evolution-demo
+```
+
+This writes a pending update under `out/evolution-demo/pending-updates/`.
+It does not edit the target skill automatically.
 
 Clean and score a transcript:
 

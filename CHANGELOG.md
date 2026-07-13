@@ -2,6 +2,15 @@
 
 All notable changes to `source-to-skill` are recorded here.
 
+## 0.3.0
+
+- Added `source-to-skill evolve` to compare a new source against an existing
+  skill before merging.
+- Added pending update reports with relationship classification, first-principles
+  review, adversarial review, proposed changes, evidence, and user decision
+  checkboxes.
+- Added a bundled existing-skill fixture for the evolution demo.
+
 ## 0.2.0
 
 - Added local EPUB intake using package metadata and spine XHTML chapters.

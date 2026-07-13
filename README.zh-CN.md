@@ -171,6 +171,16 @@ RAG 帮智能体检索知识。Skills 帮智能体带着知识行动。
 
 用户再决定：合并、保留为冲突，还是拒绝。
 
+现在已经可以先跑这一版进化流程：
+
+```bash
+source-to-skill evolve examples/article.md \
+  examples/existing-skill/review-playbook-skill \
+  --out out/evolution-demo
+```
+
+它会生成一份待确认更新报告，而不是直接改目标能力。这就是产品边界：先审查，再进化。
+
 ## 第一性原理与对抗式审查
 
 能力进化需要免疫系统。
@@ -253,7 +263,7 @@ product-positioning-skill/
 从 GitHub 安装：
 
 ```bash
-python -m pip install "source-to-skill @ git+https://github.com/GeoLab-org/source-to-skill.git@v0.2.0"
+python -m pip install "source-to-skill @ git+https://github.com/GeoLab-org/source-to-skill.git@v0.3.0"
 source-to-skill --version
 ```
 
@@ -306,6 +316,14 @@ source-to-skill build examples/article.md --level auto --out out
 
 ```bash
 source-to-skill eval-skill out/review-playbook --json
+```
+
+针对已有能力生成待确认更新：
+
+```bash
+source-to-skill evolve examples/article.md \
+  examples/existing-skill/review-playbook-skill \
+  --out out/evolution-demo
 ```
 
 强制生成能力种子：
@@ -401,7 +419,7 @@ Caution:
 
 PDF、网站爬取、浏览器渲染页面和更完整的视频工作流，留给后续采集插件。当前第一任务是把“是否值得变成能力”的判断做准。
 
-当前命令行工具已经可以构建能力产物，也可以把弱内容折叠进已有能力。上面描述的进化层是下一阶段产品方向：内容到增量、能力匹配、第一性原理测试、对抗式审查、用户确认更新和能力回归检查。
+当前命令行工具已经可以构建能力产物，也可以把弱内容折叠进已有能力。它现在也能生成待确认的能力更新，包含关系判断、第一性原理测试、对抗式审查和用户决策门槛。更完整的内容到增量匹配和能力回归检查，仍然是下一阶段产品工作。
 
 ## 设计原则
 

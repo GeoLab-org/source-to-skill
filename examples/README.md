@@ -12,6 +12,7 @@ gate; they are not meant to prove that every source should become a skill.
 | `meeting-transcript.md` | Human-readable transcript-like source |
 | `meeting-transcript.vtt` | VTT transcript cleanup example |
 | `readiness-report.md` | Example readiness report output |
+| `existing-skill/review-playbook-skill/` | Existing skill fixture for the `evolve` demo |
 
 ## Try Them
 
@@ -38,6 +39,14 @@ Build the recommended artifact:
 
 ```bash
 source-to-skill build examples/article.md --level auto --out out
+```
+
+Generate a pending update instead of creating a duplicate skill:
+
+```bash
+source-to-skill evolve examples/article.md \
+  examples/existing-skill/review-playbook-skill \
+  --out out/evolution-demo
 ```
 
 Clean the transcript before scoring it:

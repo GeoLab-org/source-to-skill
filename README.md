@@ -202,6 +202,17 @@ Suggested merge:
 
 The user should decide whether to merge, keep as a contradiction, or reject.
 
+You can run the first version of this loop today:
+
+```bash
+source-to-skill evolve examples/article.md \
+  examples/existing-skill/review-playbook-skill \
+  --out out/evolution-demo
+```
+
+This writes a pending update report instead of editing the target skill. That is
+the product boundary: review before evolution.
+
 ## First-Principles And Adversarial Review
 
 Skill evolution needs an immune system.
@@ -280,7 +291,7 @@ Future evolution levels should also include:
 Install directly from GitHub:
 
 ```bash
-python -m pip install "source-to-skill @ git+https://github.com/GeoLab-org/source-to-skill.git@v0.2.0"
+python -m pip install "source-to-skill @ git+https://github.com/GeoLab-org/source-to-skill.git@v0.3.0"
 source-to-skill --version
 ```
 
@@ -333,6 +344,14 @@ Evaluate a generated skill against its evidence file:
 
 ```bash
 source-to-skill eval-skill out/review-playbook --json
+```
+
+Generate a pending update against an existing skill:
+
+```bash
+source-to-skill evolve examples/article.md \
+  examples/existing-skill/review-playbook-skill \
+  --out out/evolution-demo
 ```
 
 Force a skill seed:
@@ -440,10 +459,10 @@ PDF, crawled websites, browser-only pages, and richer video workflows are left
 for later intake plugins. The first job is to get the skill-worthiness gate
 right.
 
-The current CLI can already build and fold skill artifacts. The evolution layer
-described above is the next product direction: source-to-delta, skill matching,
-first-principles tests, adversarial review, user-reviewed updates, and skill
-regression checks.
+The current CLI can already build and fold skill artifacts. It can also create
+pending skill updates with relationship classification, first-principles checks,
+adversarial review, and a user decision gate. Richer source-to-delta matching
+and skill regression checks remain active product work.
 
 ## Design Principles
 
